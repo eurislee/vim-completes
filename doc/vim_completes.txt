@@ -1,0 +1,120 @@
+*vim-completes*  Tiny tab completion for Vim.
+
+===============================================================================
+Contents ~
+
+ 1. Introduction                                             |vim-completes-introduction|
+ 2. What Is It ?                                             |vim-completes-what-is-it|
+ 3. Features                                                 |vim-completes-features|
+ 4. Usage                                                    |vim-completes-usage|
+ 5. Commands                                                 |vim-completes-commands|
+  1. VimCompletesEnable                                      |vim-completesenable|
+  2. VimCompletesDisable                                     |vim-completesdisable|
+ 6. Cooperative                                              |vim-completes-cooperative|
+ 7. References                                               |vim-completes-references|
+
+===============================================================================
+                                                             *vim-completes-introduction*
+Introduction ~
+
+A tiny and portable script (169 lines) to provide you 'YouCompleteMe' like
+experience for 'buffer', 'dictionary' and 'tags' completion without installing
+heavy completion engines and building background servers.
+
+===============================================================================
+                                                               *vim-completes-what-is-it*
+What Is It ? ~
+
+Semantic completion is great, but sometimes, when you are coding in an obscure
+laguange which is lack of LSP support, or you are working in a temporary system
+and you don't want waste time to set up a heavyweight completion engine and
+build a background server.
+
+In these circumstances, vim's built-in completion system is good enough for
+you, it can collect keywords from buffers and dictionary or ctag files, but
+requires you to press '<c-n>' or '<c-x><c-k>' manually.
+
+This tiny little script will help you to trigger the completion menu when you
+have entered 1 or 2 alphabets and provide you exact the same experience like
+'YouCompleteMe':
+
+  Image: (see reference [1])
+
+===============================================================================
+                                                                 *vim-completes-features*
+Features ~
+
+- Popup the completion menu automatically.
+- 'Tab' or 'shift'+'TAB' to cycle keywords, '<c-e>' to cancel.
+- Same experience like 'YouCompleteMe' for 'buffer', 'dict' and 'tags'
+  completion.
+- Green, everything is local to buffer, will not pollute your vim or disturb
+  other plugins.
+- Capable to co-exist with other completion plugins.
+- No heavy engines, no need to build background servers.
+- Faster and more handy than the old famous 'AutoComplPop'.
+- Portable, just a simple 'vim-completes.vim' script, easy to be distributed.
+- Only **169 lines**, you can even copy it to your 'vimrc'.
+- Convenience as a backup way for big completion plugins.
+
+===============================================================================
+                                                                    *vim-completes-usage*
+Usage ~
+
+That's all you need:
+>
+  Plug 'euris/vim_completes'
+
+  " enable this plugin for filetypes, '*' for all files.
+  let g:vim-completes_enable_ft = {'text':1, 'markdown':1, 'php':1}
+
+  " source for dictionary, current or other loaded buffers, see ':help cpt'
+  set cpt=.,k,w,b
+
+  " don't select the first item.
+  set completeopt=menu,menuone,noselect
+
+  " suppress annoy messages.
+  set shortmess+=c
+<
+And perhaps a dictionary database plugin for many languages:
+>
+  Plug 'euris/vim_dict'
+<
+Then you go.
+
+===============================================================================
+                                                                 *vim-completes-commands*
+Commands ~
+
+-------------------------------------------------------------------------------
+                                                                    *vim-completesenable*
+VimCompletesEnable ~
+
+Enable plugin for the current buffer manually. Useful when you didn't set
+'g:vim-completes_enable_ft'.
+
+-------------------------------------------------------------------------------
+                                                                   *vim-completesdisable*
+VimCompletesDisable ~
+
+Disable plugin for the current buffer.
+
+===============================================================================
+                                                              *vim-completes-cooperative*
+Cooperative ~
+
+If you are using 'YouCompleteMe', disable it for certain filetypes:
+>
+  let g:ycm_filetype_blacklist = {'text':1, 'markdown':1, 'php':1}
+<
+and enable this plugin for these files:
+>
+  let g:vim-completes_enable_ft = {'text':1, 'markdown':1, 'php':1}
+<
+===============================================================================
+                                                               *vim-completes-references*
+References ~
+
+
+vim: ft=help
